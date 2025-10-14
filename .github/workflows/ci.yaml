@@ -1,0 +1,40 @@
+name: CI
+on: ["push"]
+
+jobs:
+  check-ros2-workspace:
+    runs-on: ubuntu-22.04-arm
+    steps:
+      # clone the repo to the test runner (cloud computer)
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      # install pixi
+      - name: Install Pixi
+        uses: prefix-dev/setup-pixi@v0.9.0
+        with:
+          pixi-version: v0.49.0
+          cache: true
+
+      # build the workspace
+      - name: Build ROS 2 workspace
+        run: |
+          eval "$(pixi shell-hook)"
+          colcon build --symlink-install
+
+      # do python typechecking w/ `basedpyright`
+      - name: Typeck with `basedpyright` (Python)
+        shell: bash
+        run: |
+          eval "$(pixi shell-hook)"
+          . install/local_setup.bash
+          basedpyright src/
+
+      # lint python code w/ `ruff check`
+      - name: Lint (Python)
+        run: pixi run ruff check
+
+      # check python code formatting w/ `ruff format`
+      - name: Format with Ruff (Python)
+        run: pixi run ruff format --check
