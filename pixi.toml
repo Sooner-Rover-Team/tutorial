@@ -1,0 +1,56 @@
+[workspace]
+authors = [
+    "The Sooner Rover Team",                        # :D
+    "Barrett Ray <contact@barretts.club>",
+]
+channels = ["conda-forge", "robostack-humble"]
+name = "tutorial"
+platforms = ["linux-aarch64", "linux-64", "osx-arm64", "osx-64"]
+version = "0.1.0"
+
+[dependencies]
+
+# command-line tools (not for compilation)
+gh = { version = ">=2.78.0", channel = "conda-forge" }            # GitHub CLI
+just = { version = ">=1.42.4,<2", channel = "conda-forge" }       # `just` command runner
+lazygit = { version = ">=0.54.2,<0.55", channel = "conda-forge" } # `git` TUI tool
+
+# build tools (e.g., c compiler, rust, glibc)
+c-compiler = { channel = "conda-forge" }
+clang = { channel = "conda-forge" }
+clangxx = { channel = "conda-forge" }
+cxx-compiler = { channel = "conda-forge" }
+glib = { version = ">=2.80.2,<3", channel = "conda-forge" }
+make = { version = "==4.4.1", channel = "conda-forge" }
+rust = { version = ">=1.89.0", channel = "conda-forge" }
+
+# system python dependencies
+basedpyright = { version = ">=1.31.3", channel = "conda-forge" }
+numpy = ">=1.26,<2"
+python = "3.11.*"
+ruff = ">=0.12.11"
+uv = { version = "==0.8.11", channel = "conda-forge" }
+
+# ros 2 tooling (e.g., colcon, ros2-cli)
+colcon-core = { channel = "conda-forge" }
+colcon-cmake = { channel = "conda-forge" }
+colcon-common-extensions = { channel = "conda-forge" }
+colcon-mixin = { channel = "conda-forge" }
+colcon-ros = { channel = "conda-forge" }
+colcon-test-result = { channel = "conda-forge" }
+ros-humble-cyclonedds = { channel = "robostack-humble" }
+ros-humble-ros2cli = { channel = "robostack-humble" }
+ros-humble-ros2cli-common-extensions = { channel = "robostack-humble" }
+ros2-distro-mutex = { version = ">=0.7", channel = "robostack-humble" } # IMPORTANT! change ver if needed
+
+# install the ROS 2 desktop package.
+#
+# WARNING: this is a HUGE download. it has virtually everything that a new
+# ROS 2 user would want to learn how to use it.
+#
+# but yeah, again, HUGE download.
+ros-humble-desktop = { version = "==0.10.0", channel = "robostack-humble" }
+
+# required for `python-refactoring` tool
+[pypi-dependencies]
+cst_lsp = ">=0.1.3"

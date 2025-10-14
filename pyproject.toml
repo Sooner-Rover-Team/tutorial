@@ -1,0 +1,5 @@
+[tool.basedpyright]
+exclude = ["install"]
+allowedUntypedLibraries = ["sensor_msgs.msg", "rclpy"]
+reportUnknownVariableType = "none"
+reportUnknownMemberType = "none"

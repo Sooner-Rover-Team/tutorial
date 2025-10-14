@@ -1,0 +1,22 @@
+# pixi environments
+.pixi/*
+!.pixi/config.toml
+
+# build stuff
+**/build/
+**/install/
+**/log/
+**/COLCON_IGNORE
+**/AMENT_IGNORE
+
+# python
+src/**/**.egg-info
+src/**/uv.lock
+**/__pycache__
+
+# misc weird files from various oses/programs
+.ropeproject
+.DS_Store
+**/.pdb
+**/.vscode
+**/.ze
